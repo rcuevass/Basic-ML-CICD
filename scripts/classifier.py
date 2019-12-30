@@ -31,7 +31,7 @@ def train_from_dictionary(dictionary_of_models,
 if __name__ == '__main__':
 
     # set number of epochs
-    number_of_epochs: int = 5
+    number_of_epochs: int = 16
     # get data and split
     fashion_mnist = keras.datasets.fashion_mnist
     train_images: np.ndarray

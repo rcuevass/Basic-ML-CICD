@@ -7,6 +7,7 @@ from typing import List
 #
 import tensorflow as tf
 
+
 '''
 Module used for plotting purposes
 '''
@@ -57,7 +58,6 @@ def plot_image(index_: int,
                color=color)
 
 
-
 def plot_value_array(index_: int,
                      predictions_array: np.ndarray,
                      true_label: np.ndarray) -> None:
@@ -89,6 +89,7 @@ def plot_value_array(index_: int,
     bar_plot_to_show[predicted_label].set_color('red')
     # ... and show in blue true values
     bar_plot_to_show[true_label].set_color('blue')
+
 
 def plot_graphs(history: tf.keras.callbacks.History,
                 plot_title: str,
@@ -215,8 +216,20 @@ def evaluate_model_plot_predictions(model_: tf.keras.models.Sequential,
                    loss='sparse_categorical_crossentropy',
                    metrics=['accuracy'])
 
-    history = model_.fit(train_set[0], train_set[1], validation_data=(test_set[0], test_set[1]),
-                         epochs=num_epochs)
+    # Create a tf.keras.callbacks.ModelCheckpoint callback that saves
+    # weights only during training
+
+    checkpoint_path = '../models/' + model_name + '.ckpt'
+
+    # Create a callback that saves the model's weights
+    cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path,
+                                                     save_weights_only=True,
+                                                     verbose=1)
+
+    history = model_.fit(train_set[0], train_set[1],
+                         validation_data=(test_set[0], test_set[1]),
+                         epochs=num_epochs,
+                         callbacks=[cp_callback])
 
     # evaluate on test set
     model_.evaluate(test_set[0], test_set[1], verbose=2)
