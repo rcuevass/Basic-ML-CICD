@@ -14,4 +14,4 @@
 /models/model_03/
 
 # ignoring some flask apps
-/flask-app/app.py
+/flask-app/app2.py
