@@ -6,6 +6,11 @@ import numpy as np
 from typing import List
 #
 import tensorflow as tf
+import utils
+
+
+# get logging object
+log_aux = utils.get_log_object()
 
 
 '''
@@ -218,8 +223,7 @@ def evaluate_model_plot_predictions(model_: tf.keras.models.Sequential,
 
     # Create a tf.keras.callbacks.ModelCheckpoint callback that saves
     # weights only during training
-
-    checkpoint_path = '../models/' + model_name + '.ckpt'
+    checkpoint_path = '../models/' + str(model_name) + '/' + model_name + '.ckpt'
 
     # Create a callback that saves the model's weights
     cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path,
@@ -230,6 +234,10 @@ def evaluate_model_plot_predictions(model_: tf.keras.models.Sequential,
                          validation_data=(test_set[0], test_set[1]),
                          epochs=num_epochs,
                          callbacks=[cp_callback])
+
+    path_to_save_model = '../models/' + str(model_name) + '/' + model_name + '.h5'
+    log_aux.info('saving model to=%s', path_to_save_model)
+    model_.save(path_to_save_model)
 
     # evaluate on test set
     model_.evaluate(test_set[0], test_set[1], verbose=2)
@@ -270,6 +278,7 @@ def evaluate_model_plot_predictions(model_: tf.keras.models.Sequential,
     plt.tight_layout()
     plt.savefig(file_name)
     print('image saved to ', file_name)
+    log_aux.info('image saved to=%s', file_name)
     # clears plot to avoid overlap with future plots coming from future calls
     plt.clf()
     #plt.show()

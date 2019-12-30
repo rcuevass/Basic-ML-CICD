@@ -9,7 +9,6 @@
 /logs/logging.py.log.*
 
 # ignoring models
-models/checkpoint
-models/model_01.*
-models/model_02.*
-models/model_03.*
+models/model_01/
+models/model_02/
+models/model_03/
