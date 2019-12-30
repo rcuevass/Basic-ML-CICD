@@ -1,0 +1,9 @@
+# solution root contains IntelliJ’s project specific settings files.
+.idea
+
+# environment
+/py_env/*
+
+# ignoring logs
+/logs/logging.py.log
+/logs/logging.py.log.*
