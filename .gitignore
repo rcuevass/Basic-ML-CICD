@@ -1,0 +1,14 @@
+# solution root contains IntelliJ’s project specific settings files.
+.idea
+
+# environment
+/py_env/*
+
+# ignoring logs
+/logs/logging.py.log
+/logs/logging.py.log.*
+
+# ignoring models
+models/model_01/
+models/model_02/
+models/model_03/
