@@ -1,48 +1,57 @@
-from flask import Flask, request, render_template
-#from tensorflow.keras.models import load_model
-
-#from tensorflow.keras.preprocessing.image import load_img, img_to_array
-
-
-'''
-
-#from fashion_mnist_classifier.load_model import load_model
-
-#import tensorflow as tf
+import imageio
+import numpy as np
+from flask import Flask, request, render_template, jsonify
+from tensorflow.keras.models import load_model
 
 
-#import os
-#, request, render_template, jsonify
-#from fashion_mnist_classifier.load_model import load_model
-#fashion_mnist_classifier = load_model(from_s3='S3_URL' in os.environ)
-#model = load_model('../models/model_03/model_03.h5')
+# list of classes for prediction
+list_class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
+					'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
 
-'''
 
-#model = load_model('../models/model_03/model_03.h5')
+print('Loading model...')
+model_ = load_model('../models/model_03/model_03.h5')
+print('Model loaded...')
+
 
 app = Flask(__name__)
 
 # important!!! it is a decorator!
 @app.route('/', methods=['GET'])
 def index():
-	#return '<h1>hello world ... again ... kaka!!! <h1>'
-	return render_template('index.html')
+	return render_template('index.html', name='Simple TF2 classifier')
 
 
 @app.route('/predict', methods=['POST'])
 def predict():
-	#model = load_model('../models/model_03/model_03.h5')
-	if 'mnist_image' not in request.files:
-		return 'Bad request', 400
+	if request.method == 'POST':
+		if 'mnist_image' not in request.files:
+			return 'No file found', 400
 
-	print(request.files['mnist_image'])
-	return 'hello there again', 200
+		file_ = request.files['mnist_image']
+
+		try:
+			# read file and reshape by expanding
+			image_ = imageio.imread(file_)
+			image_ = np.expand_dims(image_, axis=0)
+
+		except:
+			return 'Invalid input', 400
+
+		# make prediction
+		prediction_value = model_.predict(image_)[0]
+
+		# find position with maximum probability
+		max_probability_position = int(np.argmax(prediction_value))
+
+		# get label
+		predicted_label = list_class_names[max_probability_position]
+
+		print('file name...', file_)
+		print('predicted clothing...', predicted_label)
+
+		return jsonify({'predicted image': predicted_label})
 
 
 if __name__ == '__main__':
 	app.run()
-
-
-# /Users/rcuevas/PycharmProjects/Basic-ML-CICD/data/test/image_10.jpg
-# http://localhost:5000/predict

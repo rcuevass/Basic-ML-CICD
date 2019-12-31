@@ -2,7 +2,6 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 from tensorflow import keras
 import numpy as np
 import utils
-#import scipy.misc
 import imageio
 
 
