@@ -2,6 +2,7 @@ import imageio
 import numpy as np
 from flask import Flask, request, render_template, jsonify
 from tensorflow.keras.models import load_model
+# TODO - last TF import does not seem to work in FLASK development environment -- figure it out!!!
 
 
 # list of classes for prediction
