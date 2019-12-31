@@ -46,7 +46,7 @@ if __name__ == '__main__':
     # Normalize pixel values to be between 0 and 1
     train_images, test_images = train_images / 255.0, test_images / 255.0
 
-    # save images to test folder
+    # save sample of images to test folder
     number_of_test_images: int = test_images.shape[0]
     for i in range(100):
 
