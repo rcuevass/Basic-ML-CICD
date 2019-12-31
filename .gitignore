@@ -18,4 +18,6 @@
 
 # ignoring some flask apps
 /flask-app/app2.py
+/flask-app/app_working.py
+/flask-app/tests.py
 
