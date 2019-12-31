@@ -2,6 +2,8 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 from tensorflow import keras
 import numpy as np
 import utils
+import imageio
+
 
 # get logging object
 log = utils.get_log_object()
@@ -43,7 +45,16 @@ if __name__ == '__main__':
     # Normalize pixel values to be between 0 and 1
     train_images, test_images = train_images / 255.0, test_images / 255.0
 
-    #
+    # save sample of images to test folder
+    number_of_test_images: int = test_images.shape[0]
+    for i in range(100):
+
+        image_array = test_images[i]
+        #img_uint8 = image_array.astype(np.uint8)
+        file_image_name = '../data/test/image_' + str(i) + '.jpg'
+        imageio.imwrite(file_image_name, image_array)
+
+    # save images to file
     utils.plot_images_fashion_mnist(images=train_images,
                                     images_labels=train_labels,
                                     file_location='../plots/fashion_mnist/')

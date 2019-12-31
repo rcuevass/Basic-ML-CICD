@@ -9,6 +9,15 @@
 /logs/logging.py.log.*
 
 # ignoring models
-models/model_01/
-models/model_02/
-models/model_03/
+/models/model_01/
+/models/model_02/
+/models/model_03/
+
+# ignoring test set
+/data/test/
+
+# ignoring some flask apps
+/flask-app/app2.py
+/flask-app/app_working.py
+/flask-app/tests.py
+

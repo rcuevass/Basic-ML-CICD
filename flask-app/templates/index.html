@@ -1,0 +1,20 @@
+<!doctype html>
+<div style="text-align: center">
+	<h1>
+		MNIST fashion clothing classifier
+	</h1>
+	<h3>
+		Upload an image
+	</h3>
+	<div>
+		{{ name }}
+	</div>
+	<form method="post" action="/predict" enctype="multipart/form-data">
+		<input name="mnist_image" type="file" />
+		<div>
+			<button type="submit" style="margin: 16px">
+				Press this button to predict label for selected image
+			</button>
+		</div>
+	</form>
+</div>
