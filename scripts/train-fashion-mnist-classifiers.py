@@ -55,9 +55,6 @@ if __name__ == '__main__':
         file_image_name = '../data/test/image_' + str(i) + '.jpg'
         imageio.imwrite(file_image_name, image_array)
 
-    print('done!')
-    quit()
-
     #
     utils.plot_images_fashion_mnist(images=train_images,
                                     images_labels=train_labels,
