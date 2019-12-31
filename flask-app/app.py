@@ -7,8 +7,7 @@ from tensorflow.keras.models import load_model
 
 # list of classes for prediction
 list_class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
-					'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
-
+                    'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
 
 print('Loading model...')
 model_ = load_model('../models/model_03/model_03.h5')
