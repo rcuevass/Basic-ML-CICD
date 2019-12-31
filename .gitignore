@@ -13,5 +13,9 @@
 /models/model_02/
 /models/model_03/
 
+# ignoring test set
+/data/test/
+
 # ignoring some flask apps
 /flask-app/app2.py
+
