@@ -1,7 +1,7 @@
 import imageio
 import numpy as np
 from flask import Flask, request, render_template, jsonify
-# from tensorflow.keras.models import load_model
+from tensorflow.keras.models import load_model
 # TODO - last TF import does not seem to work in FLASK development environment -- figure it out!!!
 
 
@@ -10,7 +10,7 @@ list_class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
                     'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
 
 print('Loading model...')
-#model_ = load_model('../models/model_03/model_03.h5')
+model_ = load_model('../models/model_03/model_03.h5')
 print('Model loaded...')
 
 
@@ -39,7 +39,7 @@ def predict():
 			return 'Invalid input', 400
 
 		# make prediction
-		prediction_value = np.random.randn([100, ]) #model_.predict(image_)[0]
+		prediction_value = model_.predict(image_)[0]
 
 		# find position with maximum probability
 		max_probability_position = int(np.argmax(prediction_value))
