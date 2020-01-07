@@ -21,3 +21,7 @@
 /flask-app/app_working.py
 /flask-app/tests.py
 
+# environment
+venv
+__pycache__
+
