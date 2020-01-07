@@ -11,9 +11,7 @@
 # ignoring models
 /models/model_01/
 /models/model_02/
-/models/model_03/checkpoint
-/models/model_03/model_03.ckpt.data-00000-of-00001
-/models/model_03/model_03.ckpt.index
+/models/model_03/
 
 # ignoring test set
 /data/test/
