@@ -1,4 +1,5 @@
 import imageio
+import os
 import numpy as np
 from flask import Flask, request, render_template, jsonify
 from tensorflow.keras.models import load_model
@@ -10,6 +11,7 @@ list_class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
                     'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
 
 print('Loading model...')
+print('Current dir', os.getcwd())
 model_ = load_model('../models/model_03/model_03.h5')
 print('Model loaded...')
 
