@@ -5,3 +5,4 @@ conda install -n ccf nb_conda_kernels
 pip install -U keras-tuner
 pip install -q pyyaml h5py
 pip install python3-wget
+curl https://cli-assets.heroku.com/install.sh | sh
