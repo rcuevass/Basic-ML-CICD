@@ -1,6 +1,7 @@
 import imageio
 import os
 import numpy as np
+import pandas as pd
 from flask import Flask, request, render_template, jsonify
 from tensorflow.keras.models import load_model
 # TODO - last TF import does not seem to work in FLASK development environment -- figure it out!!!
@@ -13,7 +14,8 @@ list_class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
 print('Loading model...')
 print('Current dir', os.getcwd())
 model_ = load_model('../models/model_03/model_03.h5')
-print('Model loaded...')
+df_test_labels = pd.read_csv('../data/labels_top_100_test_images.csv')
+print('Model and labels loaded...')
 
 
 app = Flask(__name__)
@@ -40,6 +42,14 @@ def predict():
 		except:
 			return 'Invalid input', 400
 
+		string_file = str(file_)
+		string_file = string_file.replace("<FileStorage: 'image_", "").replace(".jpg' ('image/jpeg')>", "")
+		#string_file = string_file.replace(".jpg' ('image/jpeg')>", "")
+		dict_labels = df_test_labels.to_dict()['Label']
+
+		# get actual label
+		actual_label = dict_labels[int(string_file)]
+
 		# make prediction
 		prediction_value = model_.predict(image_)[0]
 
@@ -50,9 +60,10 @@ def predict():
 		predicted_label = list_class_names[max_probability_position]
 
 		print('file name...', file_)
+		print('actual clothing...', actual_label)
 		print('predicted clothing...', predicted_label)
 
-		return jsonify({'predicted image': predicted_label})
+		return jsonify({'predicted image': predicted_label, 'actual image': actual_label})
 
 
 if __name__ == '__main__':

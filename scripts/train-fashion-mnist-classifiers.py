@@ -3,6 +3,7 @@ from tensorflow import keras
 import numpy as np
 import utils
 import imageio
+import pandas as pd
 
 
 # get logging object
@@ -42,12 +43,26 @@ if __name__ == '__main__':
     test_labels: np.ndarray
     (train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()
 
+    # list of classes for prediction
+    aux_list_class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
+                            'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
+
+    # set reduced number of images for testing
+    reduced_number_images = 100
+
+    reduced_list_labels = [test_labels[i] for i in range(reduced_number_images)]
+    reduced_list_labels = [aux_list_class_names[k] for k in reduced_list_labels]
+
+    # save dataframe mapping labels of integers index with string labels
+    df_Auxiliary_labels = pd.DataFrame({'Index': range(reduced_number_images), 'Label': reduced_list_labels})
+    df_Auxiliary_labels.to_csv('../data/labels_top_100_test_images.csv', index=False)
+
     # Normalize pixel values to be between 0 and 1
     train_images, test_images = train_images / 255.0, test_images / 255.0
 
     # save sample of images to test folder
     number_of_test_images: int = test_images.shape[0]
-    for i in range(100):
+    for i in range(reduced_number_images):
 
         image_array = test_images[i]
         #img_uint8 = image_array.astype(np.uint8)
