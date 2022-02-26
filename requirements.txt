@@ -129,7 +129,7 @@ mccabe==0.6.1
 mistune==0.8.4
 mkl-fft==1.0.10
 mkl-random==1.0.2
-mlflow==1.4.0
+mlflow==1.23.1
 mlxtend==0.17.0
 more-itertools==6.0.0
 mpmath==1.1.0
